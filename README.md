@@ -10,5 +10,10 @@ an ooba booga (or any llm runner and hoster thing) for discord.py
 - Go to model, download a LLM Model (if you haven't already) and load it
 - Run the .py, type the Discord Authentication Token and enjoy.
 # Notes:
-Selfbotting is against Discord Terms of Service. 
+Selfbotting is against Discord Terms of Service, use the selfbot function at your own risk. Otherwise, use the bot version instead.
 This obviously doesn't come with a LLM by itself, you must host it on your own.
+# Todo:
+- Actual working 2k characters seperator 
+- More support for llm hosters by using OpenAI module instead of sending a request
+- Working message context (Can probably be fixed by using a better model)
+- Working replying context (Can probably be fixed by using a better model)
