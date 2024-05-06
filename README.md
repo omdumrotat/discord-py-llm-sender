@@ -11,3 +11,4 @@ an ooba booga (or any llm runner and hoster thing) for discord.py
 - Run the .py, type the Discord Authentication Token and enjoy.
 # Notes:
 Selfbotting is against Discord Terms of Service. 
+This obviously doesn't come with a LLM by itself, you must host it on your own.
