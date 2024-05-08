@@ -2,6 +2,7 @@
 an ooba booga (or any llm runner and hoster thing) for discord.py
 # Requirements:
 - A PC running [oobabooga text generation webui](https://github.com/oobabooga/text-generation-webui) (anything simillar will work but you have to tinker with the get_assistant_response function)
+- Another (or the same PC) running this 
 - discord.py==1.7.2 (anything newer or older won't work)
 - A LLM model (could be anything you want but I recommend Dolphin LLaMA3)
 # Howtorun:
