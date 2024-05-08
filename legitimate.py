@@ -53,11 +53,17 @@ if __name__ == "__main__":
                 legit = True
             elif messagecontext.lower() == "n":
                 legit = False
+            else:
+                print("Invalid input")
+                exit()
             charactercheck = input("Type Y if you want to use your own character, note that you must have the character in ooba booga already, otherwise type N: ")
             if charactercheck.lower() == "y":
                 character = input("What is your character name in ooba booga?: ")
             elif charactercheck.lower() == "n":
                 character = "Assistant"
+            else:
+                print("Invalid input")
+                exit()
             class Real(discord.Client):
                 def __init__(self, *args, **kwargs):
                     super().__init__(*args, **kwargs)
