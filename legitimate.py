@@ -8,7 +8,7 @@ def check_discord_py_version():
     try:
         import pkg_resources
         discord_version = pkg_resources.get_distribution("discord.py").version
-        if discord_version == "1.7.2":
+        if discord_version == "1.7.2": # only 1.7.2 works for selfbot
             return True
         else:
             print("You are using a discord.py version that is not supported. Installing discord.py version 1.7.2 with pip...")
@@ -65,7 +65,7 @@ if __name__ == "__main__":
                 print("Invalid input")
                 exit()
             class Real(discord.Client):
-                def __init__(self, *args, **kwargs):
+                def __init__(self, *args, **kwargs): 
                     super().__init__(*args, **kwargs)
                     user_id = None
                     username = None
@@ -73,7 +73,7 @@ if __name__ == "__main__":
                     print(f"{self.user} has connected to Discord!")
                     userid = f"<@{self.user.id}>"
                     username = self.user.name
-                    await self.change_presence(status=discord.Status.online, activity=discord.Game("@me to llm | Large Language Model"))
+                    await self.change_presence(status=discord.Status.online, activity=discord.Game("@me to llm | Large Language Model")) # Feel free to change your status to whatever you want here
             
                 async def on_message(self, message):
                     if message.author == self.user:
@@ -83,23 +83,23 @@ if __name__ == "__main__":
                         mentioned_users = message.mentions  
 
                         if self.user.mentioned_in(message):
-                            mentioned_usernames = [member.name for member in mentioned_users]
+                            mentioned_usernames = [member.name for member in mentioned_users] 
                         
                             mentioned_user_ids = [f'<@{user.id}>' for user in mentioned_users]
                             for user_id, username in zip(mentioned_user_ids, mentioned_usernames):
                                 message.content = message.content.replace(user_id, f"@{username}")
                         
-                            if legit == True:
+                            if legit == True: 
                                 prev_message_context = await self.get_previous_message_context(message.channel)
-                                message.content = f"Context: {prev_message_context} User: {message.content} (only reply to the User message, nothing else.)" if prev_message_context else message.content
+                                message.content = f"Context: {prev_message_context} User: {message.content} (only reply to the User message, nothing else.)" if prev_message_context else message.content # yapping stuff that probably doesnt work also the second condition WILL not work unless you are trying to summon it in a new channel
 
-                            assistant_message = await self.get_assistant_response(message.content, username, user_id)
+                            assistant_message = await self.get_assistant_response(message.content, username, user_id) # this is where the input gets sent to the llm
                             assistant_message = escape_mentions(assistant_message)
-                            if assistant_message:
-                                await message.reply(assistant_message)
-                                print("message sent", assistant_message)
+                            if assistant_message: 
+                                await message.reply(assistant_message) 
+                                print("message sent", assistant_message) 
                     
-                        if message.reference and message.reference.cached_message:
+                        if message.reference and message.reference.cached_message: # reply check
                             referenced_message = message.reference.cached_message
                             mentioned_users = referenced_message.mentions if referenced_message.mentions else []
                             mentioned_usernames = [member.name for member in mentioned_users]
@@ -111,10 +111,10 @@ if __name__ == "__main__":
                             if referenced_message.author == self.user:  
                                 if legit == True:
                                     prev_message_context = await self.get_previous_message_context(referenced_message.channel)
-                                    user_message = f"Context: {prev_message_context} Bot message: {referenced_message.content} User message (only reply to the User message, nothing else.): {message.content}"
+                                    user_message = f"Context: {prev_message_context} Bot message: {referenced_message.content} User message (only reply to the User message, nothing else.): {message.content}" # yapping stuff that probably doesnt work 
                                 else:
                                     user_message = message.content
-                                assistant_message = await self.get_assistant_response(user_message, username, user_id)
+                                assistant_message = await self.get_assistant_response(user_message, username, user_id)  # this is where the input gets sent to the llm
                                 assistant_message = escape_mentions(assistant_message)
                 
                                 if assistant_message:
@@ -141,9 +141,9 @@ if __name__ == "__main__":
                     return " ".join(prev_message_texts)
 
 
-                async def get_assistant_response(self, user_message, username, user_id):
+                async def get_assistant_response(self, user_message, username, user_id):  # this is where the input gets sent to the llm
                     blocked_words = [username, user_id]
-                    print(blocked_words)
+                    # You can add more blocked words here if you don't want the llm to say something you don't but this is a complete block so I recommend you to block the token in the llm runner instead
                     for word in blocked_words:
                         if word in user_message:
                             user_message = user_message.replace(word, "")
@@ -155,7 +155,7 @@ if __name__ == "__main__":
                     response = requests.post(url, headers=headers, json=data, verify=False)
                     assistant_message = response.json()['choices'][0]['message']['content']
                     assistant_messages = []
-                    while len(assistant_message) > 2000:
+                    while len(assistant_message) > 2000: # assistant message 2k character seperator, i dont think it works however 
                         assistant_messages.append(assistant_message[:2000])
                         assistant_message = assistant_message[2000:]
                     assistant_messages.append(assistant_message)
