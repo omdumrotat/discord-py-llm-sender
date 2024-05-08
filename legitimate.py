@@ -76,7 +76,7 @@ if __name__ == "__main__":
                     await self.change_presence(status=discord.Status.online, activity=discord.Game("@me to llm | Large Language Model")) # Feel free to change your status to whatever you want here
             
                 async def on_message(self, message):
-                    if message.author == self.user:
+                    if message.author == self.user: #this is added so no loop will happen, this also means you cannot use the selfbot on yourself
                         return
                 
                     async with message.channel.typing(): 
