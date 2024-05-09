@@ -4,7 +4,7 @@ import os,sys
 import time
 from discord.ext import commands 
 from discord.utils import escape_mentions
-def check_discord_py_version():
+def check_discord_py_version(): #itll return true regardless lma 
     try:
         import pkg_resources
         discord_version = pkg_resources.get_distribution("discord.py").version
