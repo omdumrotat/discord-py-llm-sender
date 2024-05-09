@@ -9,7 +9,7 @@ an ooba booga (or any llm runner and hoster thing) for discord.py
 - Make sure you have ooba booga or anything simillar as described above, now run it 
 - Go to your Web UI Panel, then session, in extensions click openai, press `Save UI defaults to settings.yaml` and press apply flags/extensions and restart
 - Go to model, download a LLM Model (if you haven't already) and load it
-- Run the .py, type the Discord Authentication Token and enjoy.
+- Run the .py, type the Discord Authentication Token and enjoy. (you only need to type it once as it'll save to a file)
 # Notes:
 Selfbotting is against Discord Terms of Service, use the selfbot function at your own risk. Otherwise, use the bot version instead.
 This obviously doesn't come with a LLM by itself, you must host it on your own.
