@@ -148,7 +148,7 @@ if __name__ == "__main__":
                             blocked_words = [username, user_id]
                             for word in blocked_words:
                                 if word in user_message:
-                                    user_message = user_message.replace(word, "Bot:")
+                                    user_message = user_message.replace(word, "Bot")
                             author_username = message.author.name
                             prev_message_texts.append(f"@{author_username}: {message.content}")
                     return " ".join(prev_message_texts)
