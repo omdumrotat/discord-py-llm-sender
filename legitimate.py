@@ -46,7 +46,7 @@ def token():
 
 if __name__ == "__main__":
         if check_discord_py_version() and check_openai():
-            print("Please ensure that you have opened your favorite llm runner, opened the openai server and loaded the LLM before running this, if you haven't please do it... NOW")
+            print("Please ensure that you have opened LM Studio, opened the openai server and loaded the LLM before running this, if you haven't please do it... NOW")
             time.sleep(3)
             check = input("Are you using this on a self bot or a bot? Type S for selfbot or B for bot. Please note that selfbotting goes against Discord's TOS.: ")
             if check.lower() == "s":
@@ -156,14 +156,14 @@ if __name__ == "__main__":
                     for word in blocked_words:
                         if word in user_message:
                             user_message = user_message.replace(word, "")
-                    url = "http://127.0.0.1:5000/v1/chat/completions" # change the port if youre not using ooba
-                    headers = {"Content-Type": "application/json"}
+                    client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio") # LM studio, if youre using something else then change the api key to the according llm runner
                     history = [{"role": "user", "content": user_message}]
-                    data = {"mode": "chat", "character": character, "messages": history}
-
-                    response = requests.post(url, headers=headers, json=data, verify=False)
-                    assistant_message = response.json()['choices'][0]['message']['content']
-                    assistant_messages = []
+                    response = client.chat.completions.create(
+                          model="model-identifier",
+                          messages=history,
+                          temperature=0.7,
+                        )
+                    assistant_message = response.choices[0].message['content']
                     while len(assistant_message) > 2000: # assistant message 2k character seperator, i dont think it works however 
                         assistant_messages.append(assistant_message[:2000])
                         assistant_message = assistant_message[2000:]
