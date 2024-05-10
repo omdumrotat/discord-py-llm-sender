@@ -1,5 +1,5 @@
 # discord-py-llm-sender
-an ooba booga (or any llm runner and hoster thing) for discord.py 
+an ooba booga (or any llm runner and hoster thing) for discord.py  
 # Requirements:
 - A PC running [oobabooga text generation webui](https://github.com/oobabooga/text-generation-webui) (anything simillar will work but you have to tinker with the get_assistant_response function)
 - Another (or the same PC) running this Note: if you're running the py on another PC Please change the `127.0.0.1` part in line 150 to your other pc's IP Address
