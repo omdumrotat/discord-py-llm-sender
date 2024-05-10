@@ -21,6 +21,15 @@ def check_discord_py_version(): #itll return true regardless lma
         os.system("pip install -U discord.py==1.7.2")
         print("discord.py installed successfully.")
         return True
+def check_openai():
+    try:
+        import openai
+        return True
+    except ImportError:
+        print("OpenAI Module is not installed. Installing OpenAI with pip...")
+        os.system("pip install -U openai")
+        print("OpenAI installed successfully.")
+        return True
 def token():
     try:
         with open("token.txt", "r") as file: 
@@ -36,8 +45,8 @@ def token():
 
 
 if __name__ == "__main__":
-        if check_discord_py_version():
-            print("Please ensure that you have opened ooba booga, have openAI module enabled and loaded the LLM before running this, if you haven't please do it... NOW")
+        if check_discord_py_version() and check_openai():
+            print("Please ensure that you have opened your favorite llm runner, opened the openai server and loaded the LLM before running this, if you haven't please do it... NOW")
             time.sleep(3)
             check = input("Are you using this on a self bot or a bot? Type S for selfbot or B for bot. Please note that selfbotting goes against Discord's TOS.: ")
             if check.lower() == "s":
