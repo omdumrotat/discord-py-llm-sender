@@ -90,7 +90,7 @@ if __name__ == "__main__":
                                 message.content = message.content.replace(user_id, f"@{username}")
                         
                             if legit == True: 
-                                prev_message_context = await self.get_previous_message_context(message.channel, username, user_id)
+                                prev_message_context = await self.get_previous_message_context(message.channel, username, user_id, message.content)
                                 message.content = f"Context: {prev_message_context} {message.author.name}: {message.content} (only reply to the {message.author.name} message, nothing else.)" if prev_message_context else message.content # yapping stuff that probably doesnt work also the second condition WILL not work unless you are trying to summon it in a new channel
 
                             assistant_message = await self.get_assistant_response(message.content, username, user_id) # this is where the input gets sent to the llm
@@ -110,7 +110,7 @@ if __name__ == "__main__":
             
                             if referenced_message.author == self.user:  
                                 if legit == True:
-                                    prev_message_context = await self.get_previous_message_context(referenced_message.channel, username, user_id)
+                                    prev_message_context = await self.get_previous_message_context(referenced_message.channel, username, user_id, message.content)
                                     user_message = f"Context: {prev_message_context} Bot message: {referenced_message.content} {message.author.name} (only reply to {message.author.name}, nothing else.): {message.content}" # yapping stuff that probably doesnt work 
                                 else:
                                     user_message = message.content
@@ -124,7 +124,7 @@ if __name__ == "__main__":
                                         assistant_message = assistant_message[2000:]
                                     print("message sent", assistant_message)
 
-                async def get_previous_message_context(self, channel, username, user_id):
+                async def get_previous_message_context(self, channel, username, user_id, user_message):
                     prev_messages = await channel.history(limit=11).flatten()
                     prev_messages.reverse()
                     prev_messages.pop(10)
