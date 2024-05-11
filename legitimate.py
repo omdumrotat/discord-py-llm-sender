@@ -4,6 +4,7 @@ import os,sys
 import time
 from discord.ext import commands 
 from discord.utils import escape_mentions
+from openai import OpenAI
 def check_discord_py_version(): #itll return true regardless lma 
     try:
         import pkg_resources
@@ -23,13 +24,14 @@ def check_discord_py_version(): #itll return true regardless lma
         return True
 def check_openai():
     try:
-        from openai import OpenAI
-        return True
+        import pkg_resources
+        openai_version = pkg_resources.get_distribution("openai").version
+        if openai_version:
+            return True
     except ImportError:
         print("OpenAI Module is not installed. Installing OpenAI with pip...")
         os.system("pip install -U openai")
         print("OpenAI installed successfully.")
-        from openai import OpenAI
         return True
 def token():
     try:
