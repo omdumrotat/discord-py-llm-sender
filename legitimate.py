@@ -29,6 +29,7 @@ def check_openai():
         print("OpenAI Module is not installed. Installing OpenAI with pip...")
         os.system("pip install -U openai")
         print("OpenAI installed successfully.")
+        import openai
         return True
 def token():
     try:
