@@ -163,7 +163,7 @@ if __name__ == "__main__":
                           messages=history,
                           temperature=0.7,
                         )
-                    assistant_message = response.choices[0].message
+                    assistant_message = response.choices[0].message.content
                     return assistant_message
         if selfbot == True: 
             client = Real(self_bot=True)
