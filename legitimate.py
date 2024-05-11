@@ -23,13 +23,13 @@ def check_discord_py_version(): #itll return true regardless lma
         return True
 def check_openai():
     try:
-        import openai
+        import openai as OpenAI
         return True
     except ImportError:
         print("OpenAI Module is not installed. Installing OpenAI with pip...")
         os.system("pip install -U openai")
         print("OpenAI installed successfully.")
-        import openai
+        import openai as OpenAI
         return True
 def token():
     try:
