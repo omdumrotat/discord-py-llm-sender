@@ -162,10 +162,6 @@ if __name__ == "__main__":
                           temperature=0.7,
                         )
                     assistant_message = response.choices[0].message['content']
-                    while len(assistant_message) > 2000: # assistant message 2k character seperator, i dont think it works however 
-                        assistant_messages.append(assistant_message[:2000])
-                        assistant_message = assistant_message[2000:]
-                    assistant_messages.append(assistant_message)
                     return assistant_message
         if selfbot == True: 
             client = Real(self_bot=True)
