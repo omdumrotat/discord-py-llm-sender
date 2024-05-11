@@ -67,9 +67,6 @@ if __name__ == "__main__":
                 print("Invalid input")
                 exit()
         # removed character for now
-            else:
-                print("Invalid input")
-                exit()
             class Real(discord.Client):
                 def __init__(self, *args, **kwargs): 
                     super().__init__(*args, **kwargs)
