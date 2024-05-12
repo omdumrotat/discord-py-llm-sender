@@ -91,7 +91,7 @@ if __name__ == "__main__":
                         
                             if legit == True: 
                                 prev_message_context = await self.get_previous_message_context(message.channel, username, user_id, message.content)
-                                message.content = f"Context: {prev_message_context} {message.author.name}: {message.content} (only reply to the {message.author.name} message, nothing else.)" if prev_message_context else message.content # yapping stuff that probably doesnt work also the second condition WILL not work unless you are trying to summon it in a new channel
+                                message.content = f"Context: {prev_message_context} \n {message.author.name}: {message.content} (only reply to the {message.author.name} message, nothing else.) \n You: " if prev_message_context else message.content # yapping stuff that might work also the second condition WILL not work unless you are trying to summon it in a new channel
 
                             assistant_message = await self.get_assistant_response(message.content, username, user_id) # this is where the input gets sent to the llm
                             assistant_message = escape_mentions(assistant_message)
@@ -111,7 +111,7 @@ if __name__ == "__main__":
                             if referenced_message.author == self.user:  
                                 if legit == True:
                                     prev_message_context = await self.get_previous_message_context(referenced_message.channel, username, user_id, message.content)
-                                    user_message = f"Context: {prev_message_context} Bot message: {referenced_message.content} {message.author.name} (only reply to {message.author.name}, nothing else.): {message.content}" # yapping stuff that probably doesnt work 
+                                    user_message = f"Context: {prev_message_context} \n Bot message: {referenced_message.content} \n {message.author.name} (only reply to {message.author.name}, nothing else.): {message.content} \n You: " # yapping stuff that might work 
                                 else:
                                     user_message = message.content
                                 assistant_message = await self.get_assistant_response(user_message, username, user_id)  # this is where the input gets sent to the llm
