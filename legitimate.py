@@ -7,6 +7,7 @@ from discord.utils import escape_mentions
 from openai import OpenAI
 def check_discord_py_version(): #itll return true regardless lma 
     try:
+        os.system("pip install setuptools")
         import pkg_resources
         discord_version = pkg_resources.get_distribution("discord.py").version
         if discord_version == "1.7.2": # only 1.7.2 works for selfbot
@@ -78,7 +79,7 @@ if __name__ == "__main__":
                     print(f"{self.user} has connected to Discord!")
                     userid = f"<@{self.user.id}>"
                     username = self.user.name
-                    await self.change_presence(status=discord.Status.online, activity=discord.Game("@me to llm | Large Language Model")) # Feel free to change your status to whatever you want here
+                    await self.change_presence(status=discord.Status.online, activity=discord.Game("ping me to talk to a llm | Large Language Model")) # Feel free to change your status to whatever you want here
             
                 async def on_message(self, message):
                     if message.author == self.user: #this is added so no loop will happen, this also means you cannot use the selfbot on yourself
@@ -96,7 +97,7 @@ if __name__ == "__main__":
                         
                             if legit == True: 
                                 prev_message_context = await self.get_previous_message_context(message.channel, username, user_id, message.content)
-                                message.content = f"Context: {prev_message_context} {message.author.name}: {message.content} (only reply to the {message.author.name} message, nothing else.)" if prev_message_context else message.content # yapping stuff that probably doesnt work also the second condition WILL not work unless you are trying to summon it in a new channel
+                                message.content = f"Context: {prev_message_context} \n {message.author.name}: {message.content} (only reply to the {message.author.name} message, nothing else.) \n You: " if prev_message_context else message.content # yapping stuff that probably might work also the second condition WILL not work unless you are trying to summon it in a new channel
 
                             assistant_message = await self.get_assistant_response(message.content, username, user_id) # this is where the input gets sent to the llm
                             assistant_message = escape_mentions(assistant_message)
@@ -116,7 +117,7 @@ if __name__ == "__main__":
                             if referenced_message.author == self.user:  
                                 if legit == True:
                                     prev_message_context = await self.get_previous_message_context(referenced_message.channel, username, user_id, message.content)
-                                    user_message = f"Context: {prev_message_context} Bot message: {referenced_message.content} {message.author.name} (only reply to {message.author.name}, nothing else.): {message.content}" # yapping stuff that probably doesnt work 
+                                    user_message = f"Context: {prev_message_context} \n Bot message: {referenced_message.content} \n {message.author.name} (only reply to {message.author.name}, nothing else.): {message.content} \n You: " # yapping stuff that might work 
                                 else:
                                     user_message = message.content
                                 assistant_message = await self.get_assistant_response(user_message, username, user_id)  # this is where the input gets sent to the llm
