@@ -6,6 +6,7 @@ from discord.ext import commands
 from discord.utils import escape_mentions
 def check_discord_py_version(): #itll return true regardless lma 
     try:
+        os.system("pip install setuptools")
         import pkg_resources
         discord_version = pkg_resources.get_distribution("discord.py").version
         if discord_version == "1.7.2": # only 1.7.2 works for selfbot
@@ -73,7 +74,7 @@ if __name__ == "__main__":
                     print(f"{self.user} has connected to Discord!")
                     userid = f"<@{self.user.id}>"
                     username = self.user.name
-                    await self.change_presence(status=discord.Status.online, activity=discord.Game("@me to llm | Large Language Model")) # Feel free to change your status to whatever you want here
+                    await self.change_presence(status=discord.Status.online, activity=discord.Game("ping me to talk to a llm | Large Language Model")) # Feel free to change your status to whatever you want here
             
                 async def on_message(self, message):
                     if message.author == self.user: #this is added so no loop will happen, this also means you cannot use the selfbot on yourself
