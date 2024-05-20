@@ -38,8 +38,9 @@ def token():
 
 if __name__ == "__main__":
         if check_discord_py_version():
-            print("Please ensure that you have opened ooba booga, have openAI module enabled and loaded the LLM before running this, if you haven't please do it... NOW")
+            print("Please ensure that you have opened ollama, if you haven't please do it... NOW")
             time.sleep(3)
+            llm = input("Please enter the name of the llm you want to use, it must be available in ollama.com; for example if you want to use the 8b verison of dolphin llama3 simply type dolphin-llama3:8b")
             check = input("Are you using this on a self bot or a bot? Type S for selfbot or B for bot. Please note that selfbotting goes against Discord's TOS.: ")
             if check.lower() == "s":
                selfbot = True
@@ -54,14 +55,6 @@ if __name__ == "__main__":
                 legit = True
             elif messagecontext.lower() == "n":
                 legit = False
-            else:
-                print("Invalid input")
-                exit()
-            charactercheck = input("Type Y if you want to use your own character, note that you must have the character in ooba booga already, otherwise type N: ")
-            if charactercheck.lower() == "y":
-                character = input("What is your character name in ooba booga?: ")
-            elif charactercheck.lower() == "n":
-                character = "Assistant"
             else:
                 print("Invalid input")
                 exit()
@@ -157,7 +150,7 @@ if __name__ == "__main__":
                         "Content-Type": "application/json"
                     }
                     data = {
-                        "model": "dolphin-llama3:8b",
+                        "model": llm,
                         "messages": [
                             {"role": "user", "content": user_message}
                         ]
