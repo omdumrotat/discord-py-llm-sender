@@ -152,19 +152,41 @@ if __name__ == "__main__":
                     for word in blocked_words:
                         if word in user_message:
                             user_message = user_message.replace(word, "")
-                    url = "http://127.0.0.1:5000/v1/chat/completions" # change the port if youre not using ooba
-                    headers = {"Content-Type": "application/json"}
-                    history = [{"role": "user", "content": user_message}]
-                    data = {"mode": "chat", "character": character, "messages": history}
-
-                    response = requests.post(url, headers=headers, json=data, verify=False)
-                    assistant_message = response.json()['choices'][0]['message']['content']
-                    assistant_messages = []
-                    while len(assistant_message) > 2000: # assistant message 2k character seperator, i dont think it works however 
-                        assistant_messages.append(assistant_message[:2000])
-                        assistant_message = assistant_message[2000:]
-                    assistant_messages.append(assistant_message)
-                    return assistant_message
+                    url = "http://localhost:11434/api/chat"
+                    headers = {
+                        "Content-Type": "application/json"
+                    }
+                    data = {
+                        "model": "dolphin-llama3:8b",
+                        "messages": [
+                            {"role": "user", "content": user_message}
+                        ]
+                    }
+                    
+                    curl_command = [
+                        "curl", url,
+                        "-d", json.dumps(data),
+                        "-H", f"Content-Type: {headers['Content-Type']}"
+                    ]
+        
+                    result = subprocess.run(curl_command, capture_output=True, text=True)
+                    raw_output = result.stdout
+                    print("Raw output from curl:", raw_output) 
+                    try:
+                    # Split the raw output by lines
+                        lines = raw_output.strip().split("\n")
+                        assistant_message_parts = []
+        
+                        for line in lines:
+                            response_json = json.loads(line)
+                            if 'message' in response_json and 'content' in response_json['message']:
+                                assistant_message_parts.append(response_json['message']['content'])
+                        assistant_message = "".join(assistant_message_parts)
+                        return assistant_message
+                    except json.JSONDecodeError as e:
+                        print(f"JSON decode error: {e}")
+                        print("Raw output:", raw_output)
+                        return "Sorry, I couldn't understand the response from the server."
         if selfbot == True: 
             client = Real(self_bot=True)
             client.run(token, bot=False) 
