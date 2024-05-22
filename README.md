@@ -18,4 +18,5 @@ This obviously doesn't come with a LLM by itself, you must host it on your own.
 - Actual working 2k characters seperator Workingonit 🤔
 - ~~More support for llm hosters by using OpenAI module instead of sending a request~~ Added ✅ (openai-module-ver branch)
 - ~~Working message context (Can probably be fixed by using a better model)~~  should be added
-- Working replying context (Can probably be fixed by using a better model)
+- Working replying context (as of right now it will only work if you reply to it directly, if you reply to another persons message and ping the bot then it wont work; though that is currently being implemented)
+
