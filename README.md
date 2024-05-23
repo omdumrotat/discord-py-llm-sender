@@ -16,7 +16,7 @@ This obviously doesn't come with a LLM by itself, you must host it on your own.
 # Todo:
 - ~~Username for each message so the LLM knows who sent that message (message context mode only)~~ Added ✅
 - Actual working 2k characters seperator Workingonit 🤔
-- ~~More support for llm hosters by using OpenAI module instead of sending a request~~ Added ✅ (openai-module-ver branch)
+- ~~More support for llm hosters by using OpenAI module instead of sending a request~~ Added  ✅ (openai-module-ver branch)
 - ~~Working message context (Can probably be fixed by using a better model)~~  should be added
 - Working replying context (as of right now it will only work if you reply to it directly, if you reply to another persons message and ping the bot then it wont work; though that is currently being implemented)
 
