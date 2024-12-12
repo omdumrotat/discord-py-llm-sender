@@ -152,7 +152,7 @@ if __name__ == "__main__":
                     for word in blocked_words:
                         if word in user_message:
                             user_message = user_message.replace(word, "")
-                    url = "http://127.0.0.1:5000/v1/chat/completions" # change the port if youre not using ooba
+                    url = "http://127.0.0.1:5000/v1/chat/completions" 
                     headers = {"Content-Type": "application/json"}
                     history = [{"role": "user", "content": user_message}]
                     data = {"mode": "chat", "character": character, "messages": history}
