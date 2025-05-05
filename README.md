@@ -3,7 +3,7 @@ an ooba booga (or any llm runner and hoster) for discord.py
 Do you want a free llm on your discord account (or bot)? Well then this repo is for you!  
 # Requirements:
 - **python 3.12 or below** this is CRUCIAL for the script to work as python 3.13 might've fucked something up with the modules used. I might fix this in the future but it's not a guarantee. 
-- A PC running [oobabooga text generation webui](https://github.com/oobabooga/text-generation-webui) (if you want to use an openai compatible (or openai itself) then check out the fork
+- A PC running [oobabooga text generation webui](https://github.com/oobabooga/text-generation-webui) (if you want to use an openai compatible (or openai itself) then check out the branches 
 - Another (or the same PC) running this Note: if you're running the py on another PC Please change the `127.0.0.1` part in line 150 to your other pc's IP Address
 - discord.py==1.7.2 (anything newer or older won't work) 
 - A LLM model (could be anything you want but I recommend Dolphin LLaMA3)
